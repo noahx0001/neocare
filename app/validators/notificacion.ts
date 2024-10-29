@@ -6,4 +6,4 @@ export const notificacionPost = vine.compile(
         bebe_id: vine.number(),
         enfermera_id: vine.number(),
     })
-  )
+)
