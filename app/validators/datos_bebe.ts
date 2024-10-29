@@ -1,6 +1,6 @@
 import vine from '@vinejs/vine'
 
-export const rolPost = vine.compile(
+export const datosBebePost = vine.compile(
     vine.object({
         id: vine.number(),
         bebe_incubadora_id: vine.number(),
