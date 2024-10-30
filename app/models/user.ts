@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
-
-import Rol from './rol.js'
-import { ManyToMany } from '@adonisjs/lucid/types/relations'
+import UsuarioRol from './usuario_rol.js'
+import Enfermera from './enfermera.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -16,6 +16,12 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 export default class User extends compose(BaseModel, AuthFinder) {
   @column({ isPrimary: true })
   declare id: number
+
+  @hasMany(() => UsuarioRol)
+  declare usuarioRol: HasMany<typeof UsuarioRol>
+
+  @hasMany(() => Enfermera)
+  declare enfermera: HasMany<typeof Enfermera>
 
   @column()
   declare fullName: string | null
@@ -33,10 +39,4 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare updatedAt: DateTime | null
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
-
-
-  @manyToMany(() => Rol, {
-    pivotTable: 'usuarios_roles',
-  })
-  public roles: ManyToMany<typeof Rol>
 }
