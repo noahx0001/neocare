@@ -13,6 +13,24 @@ export default class Enfermera extends compose(BaseModel, SoftDeletes) {
   @column({ isPrimary: true })
   declare id: number
 
+  @column()
+  declare user_id: number
+
+  @column()
+  declare persona_id: number
+
+  @column()
+  declare rfc: string
+
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+
+  @column.dateTime()
+  declare deletedAt: DateTime
+
   @belongsTo(() => Persona)
   declare persona: BelongsTo<typeof Persona>
 
@@ -27,13 +45,4 @@ export default class Enfermera extends compose(BaseModel, SoftDeletes) {
 
   @hasMany(() => Chequeo)
   declare chequeo: HasMany<typeof Chequeo>
-
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
-
-  @column.dateTime()
-  declare deletedAt: DateTime
 }
