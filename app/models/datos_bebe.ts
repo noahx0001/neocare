@@ -5,11 +5,25 @@ import BebeIncubadora from './bebe_incubadora.js'
 import { compose } from '@adonisjs/core/helpers'
 import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 export default class DatosBebe extends compose(BaseModel, SoftDeletes) {
+  public static table = 'datos_bebes'
+
   @column({ isPrimary: true })
   declare id: number
 
-  @belongsTo(() => BebeIncubadora)
-  declare bebeIncubadora: BelongsTo<typeof BebeIncubadora>
+  @column()
+  declare bebe_incubadora_id: number
+
+  @column()
+  declare oxigenacion: number
+
+  @column()
+  declare pulsaciones: number
+
+  @column()
+  declare temperatura_ambient: number
+
+  @column()
+  declare temperatura_corporal: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -19,4 +33,7 @@ export default class DatosBebe extends compose(BaseModel, SoftDeletes) {
 
   @column.dateTime()
   declare deletedAt: DateTime
+
+  @belongsTo(() => BebeIncubadora)
+  declare bebeIncubadora: BelongsTo<typeof BebeIncubadora>
 }
