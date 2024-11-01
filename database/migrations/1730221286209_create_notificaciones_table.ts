@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.integer('enferma_id').notNullable().unsigned().references('id').inTable('enfermeras').onDelete('CASCADE')
       table.timestamp('created_at')
       table.timestamp('updated_at')
+      table.timestamp('deleted_at')
     })
   }
 

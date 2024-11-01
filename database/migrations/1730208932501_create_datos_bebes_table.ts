@@ -13,6 +13,7 @@ export default class extends BaseSchema {
       table.double('temperatura_corporal').notNullable()
       table.timestamp('created_at')
       table.timestamp('updated_at')
+      table.timestamp('deleted_at')
     })
   }
 

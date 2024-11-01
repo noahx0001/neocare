@@ -6,8 +6,10 @@ import User from './user.js'
 import Horario from './horario.js'
 import Notificacion from './notificacion.js'
 import Chequeo from './chequeo.js'
+import { compose } from '@adonisjs/core/helpers'
+import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
-export default class Enfermera extends BaseModel {
+export default class Enfermera extends compose(BaseModel, SoftDeletes) {
   @column({ isPrimary: true })
   declare id: number
 
@@ -31,4 +33,7 @@ export default class Enfermera extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @column.dateTime()
+  declare deletedAt: DateTime
 }

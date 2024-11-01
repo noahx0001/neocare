@@ -13,7 +13,6 @@ export default class Familiar extends BaseModel {
   @belongsTo(() => Bebe)
   declare bebe: BelongsTo<typeof Bebe>
 
-
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

@@ -19,5 +19,4 @@ export default class UsuarioRol extends BaseModel {
 
   @belongsTo(() => Rol)
   declare rol: BelongsTo<typeof Rol>
-
 }

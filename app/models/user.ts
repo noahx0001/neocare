@@ -7,13 +7,14 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import UsuarioRol from './usuario_rol.js'
 import Enfermera from './enfermera.js'
+import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
   passwordColumnName: 'password',
 })
 
-export default class User extends compose(BaseModel, AuthFinder) {
+export default class User extends compose(BaseModel, AuthFinder, SoftDeletes) {
   @column({ isPrimary: true })
   declare id: number
 
@@ -37,6 +38,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+
+  @column.dateTime({ serializeAs: null })
+  declare deletedAt: DateTime | null
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 }

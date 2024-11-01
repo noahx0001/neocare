@@ -5,8 +5,10 @@ import Incubadora from './incubadora.js'
 import Bebe from './bebe.js'
 import Chequeo from './chequeo.js'
 import DatosBebe from './datos_bebe.js'
+import { compose } from '@adonisjs/core/helpers'
+import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
-export default class BebeIncubadora extends BaseModel {
+export default class BebeIncubadora extends compose(BaseModel, SoftDeletes) {
   @column({ isPrimary: true })
   declare id: number
 
@@ -27,4 +29,7 @@ export default class BebeIncubadora extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @column.dateTime()
+  declare deletedAt: DateTime
 }

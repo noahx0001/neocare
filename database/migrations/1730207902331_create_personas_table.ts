@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.string('apellido_materno').notNullable()
       table.timestamp('created_at')
       table.timestamp('updated_at')
+      table.timestamp('deleted_at')
     })
   }
 

@@ -6,8 +6,10 @@ import Persona from './persona.js'
 import Familiar from './familiar.js'
 import Notificacion from './notificacion.js'
 import BebeIncubadora from './bebe_incubadora.js'
+import { compose } from '@adonisjs/core/helpers'
+import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
-export default class Bebe extends BaseModel {
+export default class Bebe extends compose(BaseModel, SoftDeletes) {
   @column({ isPrimary: true })
   declare id: number
 
@@ -28,4 +30,7 @@ export default class Bebe extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @column.dateTime()
+  declare deletedAt: DateTime
 }

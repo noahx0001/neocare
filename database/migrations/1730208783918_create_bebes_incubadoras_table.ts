@@ -12,6 +12,7 @@ export default class extends BaseSchema {
       table.date('fecha_egreso').notNullable()
       table.timestamp('created_at')
       table.timestamp('updated_at')
+      table.timestamp('deleted_at')
     })
   }
 

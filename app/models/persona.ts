@@ -4,8 +4,10 @@ import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import Familiar from './familiar.js'
 import Enfermera from './enfermera.js'
 import Bebe from './bebe.js'
+import { compose } from '@adonisjs/core/helpers'
+import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
-export default class Persona extends BaseModel {
+export default class Persona extends compose(BaseModel, SoftDeletes) {
   @column({ isPrimary: true })
   declare id: number
 
@@ -23,4 +25,7 @@ export default class Persona extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @column.dateTime()
+  declare deletedAt: DateTime
 }

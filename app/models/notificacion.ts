@@ -3,8 +3,10 @@ import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { column, BaseModel, belongsTo } from '@adonisjs/lucid/orm'
 import Bebe from './bebe.js'
 import Enfermera from './enfermera.js'
+import { compose } from '@adonisjs/core/helpers'
+import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
-export default class Notificacion extends BaseModel {
+export default class Notificacion extends compose(BaseModel, SoftDeletes) {
   @column({ isPrimary: true })
   declare id: number
 
@@ -19,4 +21,7 @@ export default class Notificacion extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @column.dateTime()
+  declare deletedAt: DateTime
 }
