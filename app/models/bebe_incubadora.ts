@@ -9,8 +9,31 @@ import { compose } from '@adonisjs/core/helpers'
 import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
 export default class BebeIncubadora extends compose(BaseModel, SoftDeletes) {
+  public static table = 'bebes_incubadoras'
+
   @column({ isPrimary: true })
   declare id: number
+
+  @column()
+  declare bebe_id: number
+
+  @column()
+  declare incubadora_id: number
+
+  @column()
+  declare fecha_ingreso: Date
+
+  @column()
+  declare fecha_egreso: Date
+
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+
+  @column.dateTime()
+  declare deletedAt: DateTime
 
   @belongsTo(() => Bebe)
   declare bebe: BelongsTo<typeof Bebe>
@@ -23,13 +46,4 @@ export default class BebeIncubadora extends compose(BaseModel, SoftDeletes) {
 
   @hasMany(() => DatosBebe)
   declare DatosBebe: HasMany<typeof DatosBebe>
-
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
-
-  @column.dateTime()
-  declare deletedAt: DateTime
 }
