@@ -7,14 +7,16 @@ import { compose } from '@adonisjs/core/helpers'
 import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
 export default class Notificacion extends compose(BaseModel, SoftDeletes) {
+  public static table = 'notificaciones'
+
   @column({ isPrimary: true })
   declare id: number
 
-  @belongsTo(() => Bebe)
-  declare bebe: BelongsTo<typeof Bebe>
+  @column()
+  declare bebe_id: number
 
-  @belongsTo(() => Enfermera)
-  declare enfermera: BelongsTo<typeof Enfermera>
+  @column()
+  declare enfermera_id: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -24,4 +26,10 @@ export default class Notificacion extends compose(BaseModel, SoftDeletes) {
 
   @column.dateTime()
   declare deletedAt: DateTime
+
+  @belongsTo(() => Bebe)
+  declare bebe: BelongsTo<typeof Bebe>
+
+  @belongsTo(() => Enfermera)
+  declare enfermera: BelongsTo<typeof Enfermera>
 }
