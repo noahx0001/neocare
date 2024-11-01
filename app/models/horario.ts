@@ -6,11 +6,22 @@ import { compose } from '@adonisjs/core/helpers'
 import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
 export default class Horario extends compose(BaseModel, SoftDeletes) {
+  public static table = 'horarios'
+  
   @column({ isPrimary: true })
   declare id: number
 
-  @belongsTo(() => Enfermera)
-  declare enfermera: BelongsTo<typeof Enfermera>
+  @column()
+  declare enfermera_id: number
+
+  @column()
+  declare dia: string 
+
+  @column()
+  declare hora_inicial: string
+
+  @column()
+  declare hora_final: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -20,4 +31,7 @@ export default class Horario extends compose(BaseModel, SoftDeletes) {
 
   @column.dateTime()
   declare deletedAt: DateTime
+
+  @belongsTo(() => Enfermera)
+  declare enfermera: BelongsTo<typeof Enfermera>
 }
