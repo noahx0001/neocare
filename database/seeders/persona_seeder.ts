@@ -1,8 +1,8 @@
+import { PersonaFactory } from '#database/factories/persona_factory'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
-import { UserFactory } from '#database/factories/user_factory'
 
 export default class extends BaseSeeder {
   async run() {
-    await UserFactory.createMany(10)
+    await PersonaFactory.createMany(10)
   }
 }

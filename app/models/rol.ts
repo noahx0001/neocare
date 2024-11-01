@@ -6,6 +6,8 @@ import { compose } from '@adonisjs/core/helpers'
 import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
 export default class Rol extends compose(BaseModel, SoftDeletes) {
+  public static table = 'roles'
+  
   @column({ isPrimary: true })
   declare id: number
 

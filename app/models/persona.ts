@@ -8,8 +8,19 @@ import { compose } from '@adonisjs/core/helpers'
 import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
 export default class Persona extends compose(BaseModel, SoftDeletes) {
+  public static table = 'personas'
+
   @column({ isPrimary: true })
   declare id: number
+
+  @column()
+  declare nombre: string
+
+  @column()
+  declare apellido_paterno: string
+
+  @column()
+  declare apellido_materno: string
 
   @hasMany(() => Familiar)
   declare familiares: HasMany<typeof Familiar>

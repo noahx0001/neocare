@@ -6,8 +6,13 @@ import { compose } from '@adonisjs/core/helpers'
 import { SoftDeletes } from 'adonis-lucid-soft-deletes'
 
 export default class Incubadora extends compose(BaseModel, SoftDeletes) {
+  public static table = 'incubadoras'
+
   @column({ isPrimary: true })
   declare id: number
+
+  @column()
+  declare estado: string
 
   @hasMany(() => BebeIncubadora)
   declare bebeIncubadoras: HasMany<typeof BebeIncubadora>
